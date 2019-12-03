@@ -8,9 +8,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/pkg/errors"
-	"github.com/wangsongyan/wblog/helpers"
-	"github.com/wangsongyan/wblog/models"
-	"github.com/wangsongyan/wblog/system"
+	"github.com/antracewalking/antblog/helpers"
+	"github.com/antracewalking/antblog/models"
+	"github.com/antracewalking/antblog/system"
 )
 
 func SubscribeGet(c *gin.Context) {

@@ -14,8 +14,8 @@ import (
 	"github.com/pkg/errors"
 	"github.com/qiniu/api.v7/auth/qbox"
 	"github.com/qiniu/api.v7/storage"
-	"github.com/wangsongyan/wblog/helpers"
-	"github.com/wangsongyan/wblog/system"
+	"github.com/antracewalking/antblog/helpers"
+	"github.com/antracewalking/antblog/system"
 )
 
 func BackupPost(c *gin.Context) {
@@ -113,7 +113,7 @@ func Backup() (err error) {
 	uploader := storage.NewFormUploader(&cfg)
 	putExtra := storage.PutExtra{}
 
-	fileName := fmt.Sprintf("wblog_%s.db", helpers.GetCurrentTime().Format("20060102150405"))
+	fileName := fmt.Sprintf("antblog_%s.db", helpers.GetCurrentTime().Format("20060102150405"))
 	err = uploader.Put(context.Background(), &ret, token, fileName, bytes.NewReader(encryptData), int64(len(encryptData)), &putExtra)
 	if err != nil {
 		seelog.Debugf("backup error:%v", err)

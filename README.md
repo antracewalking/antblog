@@ -1,4 +1,4 @@
-# wblog [![Build Status](https://www.travis-ci.org/wangsongyan/wblog.svg?branch=master)](https://www.travis-ci.org/wangsongyan/wblog)  
+# antblog [![Build Status](https://www.travis-ci.org/antracewalking/antblog.svg?branch=master)](https://www.travis-ci.org/antracewalking/antblog)  
 [示例地址](http://67.216.221.42/)
 
 ## 初衷
@@ -15,7 +15,7 @@
 
 ## 项目结构
 ```
--wblog
+-antblog
     |-conf 配置文件目录
     |-controllers 控制器目录
     |-helpders 公共方法目录
@@ -47,8 +47,8 @@ go get -u github.com/kardianos/govendor
 ```
 
 ```
-git clone https://github.com/wangsongyan/wblog
-cd wblog
+git clone https://github.com/antracewalking/antblog
+cd antblog
 govendor sync
 go run main.go
 ```
@@ -85,5 +85,5 @@ go run main.go
 
 ## 捐赠
 如果项目对您有帮助，打赏个鸡腿吃呗！  
-<img src="https://raw.githubusercontent.com/wangsongyan/wblog/master/screenshots/alipay.png" width = 40% height = 40% />
-<img src="https://raw.githubusercontent.com/wangsongyan/wblog/master/screenshots/weixin.png" width = 40% height = 40% />
+<img src="https://raw.githubusercontent.com/antracewalking/antblog/master/screenshots/alipay.png" width = 40% height = 40% />
+<img src="https://raw.githubusercontent.com/antracewalking/antblog/master/screenshots/weixin.png" width = 40% height = 40% />

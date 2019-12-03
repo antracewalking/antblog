@@ -9,8 +9,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/microcosm-cc/bluemonday"
 	"github.com/russross/blackfriday"
-	"github.com/wangsongyan/wblog/models"
-	"github.com/wangsongyan/wblog/system"
+	"github.com/antracewalking/antblog/models"
+	"github.com/antracewalking/antblog/system"
 )
 
 func TagCreate(c *gin.Context) {
