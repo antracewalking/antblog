@@ -6,19 +6,19 @@ import (
 	"github.com/cihub/seelog"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/feeds"
-	"github.com/antracewalking/antblog/helpers"
-	"github.com/antracewalking/antblog/models"
-	"github.com/antracewalking/antblog/system"
+	"antblog/helpers"
+	"antblog/models"
+	"antblog/system"
 )
 
 func RssGet(c *gin.Context) {
 	now := helpers.GetCurrentTime()
 	domain := system.GetConfiguration().Domain
 	feed := &feeds.Feed{
-		Title:       "Wblog",
+		Title:       "antblog",
 		Link:        &feeds.Link{Href: domain},
-		Description: "Wblog,talk about golang,java and so on.",
-		Author:      &feeds.Author{Name: "Wangsongyan", Email: "antracewalkinglove@163.com"},
+		Description: "antblog,talk about golang,php and so on.",
+		Author:      &feeds.Author{Name: "liming", Email: "liming422324@163.com"},
 		Created:     now,
 	}
 

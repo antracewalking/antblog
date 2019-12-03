@@ -1,4 +1,4 @@
-# antblog [![Build Status](https://www.travis-ci.org/antracewalking/antblog.svg?branch=master)](https://www.travis-ci.org/antracewalking/antblog)  
+# antblog [![Build Status](https://www.travis-ci.org/github.com/antracewalking/antblog.svg?branch=master)](https://www.travis-ci.org/github.com/antracewalking/antblog)  
 [示例地址](http://67.216.221.42/)
 
 ## 初衷

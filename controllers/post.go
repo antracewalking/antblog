@@ -6,7 +6,7 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
-	"github.com/antracewalking/antblog/models"
+	"antblog/models"
 )
 
 func PostGet(c *gin.Context) {

@@ -9,9 +9,9 @@ import (
 	"mime/multipart"
 	"net/http"
 
-	"github.com/antracewalking/antblog/models"
+	"antblog/models"
 
-	"github.com/antracewalking/antblog/system"
+	"antblog/system"
 )
 
 type SmmsUploader struct {

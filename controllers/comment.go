@@ -8,8 +8,8 @@ import (
 	"github.com/dchest/captcha"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
-	"github.com/antracewalking/antblog/models"
-	"github.com/antracewalking/antblog/system"
+	"antblog/models"
+	"antblog/system"
 )
 
 func CommentPost(c *gin.Context) {

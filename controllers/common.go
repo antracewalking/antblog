@@ -10,9 +10,9 @@ import (
 
 	"github.com/denisbakhtin/sitemap"
 	"github.com/gin-gonic/gin"
-	"github.com/antracewalking/antblog/helpers"
-	"github.com/antracewalking/antblog/models"
-	"github.com/antracewalking/antblog/system"
+	"antblog/helpers"
+	"antblog/models"
+	"antblog/system"
 )
 
 const (

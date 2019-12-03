@@ -14,10 +14,10 @@ import (
 	"github.com/claudiu/gocron"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
-	"github.com/antracewalking/antblog/controllers"
-	"github.com/antracewalking/antblog/helpers"
-	"github.com/antracewalking/antblog/models"
-	"github.com/antracewalking/antblog/system"
+	"antblog/controllers"
+	"antblog/helpers"
+	"antblog/models"
+	"antblog/system"
 )
 
 func main() {

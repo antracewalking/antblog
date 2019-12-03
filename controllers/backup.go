@@ -14,8 +14,8 @@ import (
 	"github.com/pkg/errors"
 	"github.com/qiniu/api.v7/auth/qbox"
 	"github.com/qiniu/api.v7/storage"
-	"github.com/antracewalking/antblog/helpers"
-	"github.com/antracewalking/antblog/system"
+	"antblog/helpers"
+	"antblog/system"
 )
 
 func BackupPost(c *gin.Context) {
