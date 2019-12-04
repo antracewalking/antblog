@@ -1,10 +1,10 @@
 <seelog minlevel="trace">
     <outputs formatid="common">
-        <filter levels="info,debug">
-            <rollingfile type="size" filename="log/common.log" maxsize="102400" maxrolls="5"/>
+        <filter levels="info,debug,trace">
+            <rollingfile type="date" filename="log/antblog.log" datepattern="20191204" fullname="true"  maxrolls="30"/>
         </filter>
-        <filter levels="error,critical">
-            <rollingfile type="size" filename="log/error.log" maxsize="102400" maxrolls="5"/>
+        <filter levels="warn,error,critical">
+            <rollingfile type="date" filename="log/antblog.log.wf" datepattern="20191204" fullname="true"  maxrolls="30"/>
         </filter>
     </outputs>
     <formats>

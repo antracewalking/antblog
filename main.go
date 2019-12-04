@@ -4,25 +4,27 @@ import (
 	"flag"
 	"html/template"
 	"net/http"
+	"os/signal"
+	"time"
+	"context"
 
 	"path/filepath"
 
 	"os"
 	"strings"
 
+	"antblog/controllers"
+	"antblog/helpers"
+	"antblog/models"
+	"antblog/system"
 	"github.com/cihub/seelog"
 	"github.com/claudiu/gocron"
 	//"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
-	"antblog/controllers"
-	"antblog/helpers"
-	"antblog/models"
-	"antblog/system"
 )
 
 func main() {
-
 	configFilePath := flag.String("C", "conf/conf.yaml", "config file path")
 	logConfigPath := flag.String("L", "conf/seelog.xml", "log config file path")
 	flag.Parse()
@@ -61,6 +63,40 @@ func main() {
 
 	router.Static("/static", filepath.Join(getCurrentDirectory(), "./static"))
 
+	setUrlRoute(router)
+	setAdminUrlRoute(router)
+
+	//router.Run(system.GetConfiguration().Addr)
+
+	s := &http.Server{
+		Addr:           system.GetConfiguration().Addr,
+		Handler:        router,
+		//ReadTimeout:    setting.ReadTimeout,
+		//WriteTimeout:   setting.WriteTimeout,
+		//MaxHeaderBytes: 1 << 20,
+	}
+	go func() {
+		if err := s.ListenAndServe(); err != nil {
+			seelog.Info("Listen err", err)
+		}
+	}()
+
+	quit := make(chan os.Signal)
+	signal.Notify(quit, os.Interrupt)
+	<- quit
+
+	seelog.Info("Shutdown Server ...")
+
+	ctx, cancel := context.WithTimeout(context.Background(), 5 * time.Second)
+	defer cancel()
+	if err := s.Shutdown(ctx); err != nil {
+		seelog.Error("Server Shutdown err:", err)
+	}
+
+	seelog.Info("Server exiting")
+}
+
+func setUrlRoute(router *gin.Engine) {
 	router.NoRoute(controllers.Handle404)
 	router.GET("/", controllers.IndexGet)
 	router.GET("/index", controllers.IndexGet)
@@ -99,7 +135,9 @@ func main() {
 	router.GET("/archives/:year/:month", controllers.ArchiveGet)
 
 	router.GET("/link/:id", controllers.LinkGet)
+}
 
+func setAdminUrlRoute(router *gin.Engine) {
 	authorized := router.Group("/admin")
 	authorized.Use(AdminScopeRequired())
 	{
@@ -163,8 +201,6 @@ func main() {
 		authorized.POST("/new_mail", controllers.SendMail)
 		authorized.POST("/new_batchmail", controllers.SendBatchMail)
 	}
-
-	router.Run(system.GetConfiguration().Addr)
 }
 
 func setTemplate(engine *gin.Engine) {
