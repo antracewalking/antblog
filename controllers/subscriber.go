@@ -80,7 +80,7 @@ func sendActiveEmail(subscriber *models.Subscriber) (err error) {
 	subscriber.SecretKey = uuid
 	signature := helpers.Md5(subscriber.Email + uuid + subscriber.OutTime.Format("20060102150405"))
 	subscriber.Signature = signature
-	err = sendMail(subscriber.Email, "[Wblog]邮箱验证", fmt.Sprintf("%s/active?sid=%s", system.GetConfiguration().Domain, signature))
+	err = sendMail(subscriber.Email, "[antblog 蚂蚁竞走]邮箱验证", fmt.Sprintf("%s/active?sid=%s", system.GetConfiguration().Domain, signature))
 	if err != nil {
 		return
 	}
