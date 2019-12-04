@@ -102,18 +102,20 @@ func main() {
 		defer cancel()
 		if err := server.Shutdown(ctx); nil != err {
 			seelog.Error("server shutdown failed, err: ", err)
+		} else {
+			seelog.Info("server gracefully shutdown")
 		}
-		seelog.Info("server gracefully shutdown")
 
 		close(processed)
 	}()
 
 	// serve
+	seelog.Info("server going to start loop for accept client conn")
 	err = server.Serve(listener)
 	if http.ErrServerClosed != err {
 		seelog.Error("server not gracefully shutdown, err :", err)
 	} else {
-		seelog.Info("server start ok")
+		seelog.Info("server shutdown finish")
 	}
 
 	// waiting for goroutine above processed
