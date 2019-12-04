@@ -6,7 +6,8 @@ import (
 	"fmt"
 
 	"github.com/dchest/captcha"
-	"github.com/gin-contrib/sessions"
+//	"github.com/gin-contrib/sessions"
+	"github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"antblog/models"
 	"antblog/system"
