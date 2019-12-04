@@ -25,6 +25,7 @@ import (
 )
 
 func main() {
+	os.Mkdir("log",os.ModePerm)
 	configFilePath := flag.String("C", "conf/conf.yaml", "config file path")
 	logConfigPath := flag.String("L", "conf/seelog.xml", "log config file path")
 	flag.Parse()
@@ -35,12 +36,14 @@ func main() {
 		return
 	}
 	seelog.ReplaceLogger(logger)
+	seelog.Info("load logger ok ")
 	defer seelog.Flush()
 
 	if err := system.LoadConfiguration(*configFilePath); err != nil {
 		seelog.Critical("err parsing config log file", err)
 		return
 	}
+	seelog.Info("load config ok ")
 
 	db, err := models.InitDB()
 	if err != nil {
@@ -48,6 +51,7 @@ func main() {
 		return
 	}
 	defer db.Close()
+	seelog.Info("init db ok ")
 
 	gin.SetMode(gin.ReleaseMode)
 	router := gin.Default()
@@ -55,16 +59,21 @@ func main() {
 	setTemplate(router)
 	setSessions(router)
 	router.Use(SharedData())
+	seelog.Info("set template, session, shared data ok")
 
 	//Periodic tasks
 	gocron.Every(1).Day().Do(controllers.CreateXMLSitemap)
 	gocron.Every(7).Days().Do(controllers.Backup)
 	gocron.Start()
 
+	seelog.Info("go cron ok ")
+
 	router.Static("/static", filepath.Join(getCurrentDirectory(), "./static"))
+	seelog.Info("load static file ok ")
 
 	setUrlRoute(router)
 	setAdminUrlRoute(router)
+	seelog.Info("url config route ok ")
 
 	//router.Run(system.GetConfiguration().Addr)
 
@@ -78,6 +87,7 @@ func main() {
 	go func() {
 		if err := s.ListenAndServe(); err != nil {
 			seelog.Info("Listen err", err)
+			return
 		}
 	}()
 
