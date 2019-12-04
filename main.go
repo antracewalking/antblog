@@ -77,33 +77,47 @@ func main() {
 
 	//router.Run(system.GetConfiguration().Addr)
 
-	s := &http.Server{
-		Addr:           system.GetConfiguration().Addr,
+	listener, err := helpers.Listen("tcp", system.GetConfiguration().Addr)
+	if err != nil {
+		panic(err)
+	}
+	defer listener.Close()
+
+	server := &http.Server{
+		//Addr:           system.GetConfiguration().Addr,
 		Handler:        router,
 		//ReadTimeout:    setting.ReadTimeout,
 		//WriteTimeout:   setting.WriteTimeout,
 		//MaxHeaderBytes: 1 << 20,
 	}
+
+	// make sure idle connections returned
+	processed := make(chan struct{})
 	go func() {
-		if err := s.ListenAndServe(); err != nil {
-			seelog.Info("Listen err", err)
-			return
+		c := make(chan os.Signal, 1)
+		signal.Notify(c, os.Interrupt)
+		<-c
+
+		ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+		defer cancel()
+		if err := server.Shutdown(ctx); nil != err {
+			seelog.Error("server shutdown failed, err: ", err)
 		}
+		seelog.Info("server gracefully shutdown")
+
+		close(processed)
 	}()
 
-	quit := make(chan os.Signal)
-	signal.Notify(quit, os.Interrupt)
-	<- quit
-
-	seelog.Info("Shutdown Server ...")
-
-	ctx, cancel := context.WithTimeout(context.Background(), 5 * time.Second)
-	defer cancel()
-	if err := s.Shutdown(ctx); err != nil {
-		seelog.Error("Server Shutdown err:", err)
+	// serve
+	err = server.Serve(listener)
+	if http.ErrServerClosed != err {
+		seelog.Error("server not gracefully shutdown, err :", err)
+	} else {
+		seelog.Info("server start ok")
 	}
 
-	seelog.Info("Server exiting")
+	// waiting for goroutine above processed
+	<-processed
 }
 
 func setUrlRoute(router *gin.Engine) {
@@ -307,6 +321,7 @@ func getCurrentDirectory() string {
 	}
 	return strings.Replace(dir, "\\", "/", -1)
 }
+
 
 //func getCurrentDirectory() string {
 //	return ""
