@@ -12,7 +12,8 @@ import (
 
 	"github.com/cihub/seelog"
 	"github.com/claudiu/gocron"
-	"github.com/gin-contrib/sessions"
+	//"github.com/gin-contrib/sessions"
+	"github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"antblog/controllers"
 	"antblog/helpers"
@@ -180,7 +181,8 @@ func setTemplate(engine *gin.Engine) {
 	}
 
 	engine.SetFuncMap(funcMap)
-	engine.LoadHTMLGlob(filepath.Join(getCurrentDirectory(), "./views/**/*"))
+	//engine.LoadHTMLGlob(filepath.Join(getCurrentDirectory(), "./views/**/*"))
+	engine.LoadHTMLGlob(filepath.Join(".", "./views/**/*"))
 }
 
 //setSessions initializes sessions & csrf middlewares

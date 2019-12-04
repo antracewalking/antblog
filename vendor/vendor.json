@@ -27,6 +27,18 @@
 			"revisionTime": "2017-05-03T20:53:33Z"
 		},
 		{
+			"checksumSHA1": "ulHAt7P7SYMC2g3ThlXNzVN9Z/k=",
+			"path": "github.com/chris-ramon/douceur/css",
+			"revision": "f3463056cd52886eda904655e1940157bf323bd7",
+			"revisionTime": "2016-06-03T23:54:19Z"
+		},
+		{
+			"checksumSHA1": "jWIgyVGWXtHIKfRy40IUlMZyvUY=",
+			"path": "github.com/chris-ramon/douceur/parser",
+			"revision": "f3463056cd52886eda904655e1940157bf323bd7",
+			"revisionTime": "2016-06-03T23:54:19Z"
+		},
+		{
 			"checksumSHA1": "aeMQwIvMh0XOP8UqV+z/YR8DW9g=",
 			"path": "github.com/cihub/seelog",
 			"revision": "f561c5e57575bb1e0a2167028b7339b3a8d16fb4",
@@ -99,6 +111,12 @@
 			"revisionTime": "2017-01-09T09:34:21Z"
 		},
 		{
+			"checksumSHA1": "NZxsVvdfuvaztRyLPz43rOIBAN8=",
+			"path": "github.com/gin-gonic/contrib/sessions",
+			"revision": "35076c1b2beaf5f26634fe6468bce6707c3d880a",
+			"revisionTime": "2019-09-23T05:42:18Z"
+		},
+		{
 			"checksumSHA1": "2cZgogX0Ftbl+9w67R6fBD/ozBc=",
 			"path": "github.com/gin-gonic/gin",
 			"revision": "c16c2b7ec33175b23667be512a74dbb7f3943aa5",
@@ -109,6 +127,12 @@
 			"path": "github.com/gin-gonic/gin/binding",
 			"revision": "c16c2b7ec33175b23667be512a74dbb7f3943aa5",
 			"revisionTime": "2017-08-30T04:18:57Z"
+		},
+		{
+			"checksumSHA1": "rST0S8cuVbM57VmJhWXhKNUkKTc=",
+			"path": "github.com/gin-gonic/gin/internal/json",
+			"revision": "7c21e04f628f1cabdf4029fd5c78a8f2b152faae",
+			"revisionTime": "2019-12-03T23:56:01Z"
 		},
 		{
 			"checksumSHA1": "+UgLC+h5OGeymvpZEIYnDCFWctA=",
@@ -123,6 +147,12 @@
 			"revisionTime": "2017-08-30T04:18:57Z"
 		},
 		{
+			"checksumSHA1": "bE6Z+IptruBvA+iZTBPjjNqzRRI=",
+			"path": "github.com/go-sql-driver/mysql",
+			"revision": "15462c1d60d42ecca11d6ef9fec0b0afd5833459",
+			"revisionTime": "2019-11-21T06:26:41Z"
+		},
+		{
 			"checksumSHA1": "YpgvTvW1gWqfe/zXQbIl8yF1eHQ=",
 			"path": "github.com/go-yaml/yaml",
 			"revision": "cd8b52f8269e0feb286dfeef29f8fe4d5b397e0b",
@@ -135,10 +165,22 @@
 			"revisionTime": "2017-06-13T22:42:24Z"
 		},
 		{
+			"checksumSHA1": "4KbXUkgZntknnW1Z33EF+S0DB7I=",
+			"path": "github.com/gomodule/redigo/redis",
+			"revision": "09d84710e01a746165eadd36e85d25e0e1923cff",
+			"revisionTime": "2019-11-08T16:41:05Z"
+		},
+		{
 			"checksumSHA1": "IkPM2QLv9urri7S49wzroQx9oXA=",
 			"path": "github.com/gorilla/context",
 			"revision": "08b5f424b9271eedf6f9f0ce86cb9396ed337a42",
 			"revisionTime": "2016-08-17T18:46:32Z"
+		},
+		{
+			"checksumSHA1": "Ttr0ESMQ/w/LYWdvGUPErQtQgsY=",
+			"path": "github.com/gorilla/css/scanner",
+			"revision": "4940b8d7810384b58c15dbf1103a148fdf0761f2",
+			"revisionTime": "2019-06-27T04:11:19Z"
 		},
 		{
 			"checksumSHA1": "Y1nawjHIFRIOsFAHZft+nbM5+Fk=",
@@ -363,5 +405,5 @@
 			"revisionTime": "2015-07-21T03:41:13Z"
 		}
 	],
-	"rootPath": "github.com/antracewalking/antblog"
+	"rootPath": "antblog"
 }
