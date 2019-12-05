@@ -9,13 +9,13 @@ import (
 
 	"github.com/alimoeeny/gooauth2"
 	"github.com/cihub/seelog"
-//	"github.com/gin-contrib/sessions"
-	"github.com/gin-gonic/contrib/sessions"
-	"github.com/gin-gonic/gin"
-	"github.com/pkg/errors"
 	"antblog/helpers"
 	"antblog/models"
 	"antblog/system"
+	//	"github.com/gin-contrib/sessions"
+	"github.com/gin-gonic/contrib/sessions"
+	"github.com/gin-gonic/gin"
+	"github.com/pkg/errors"
 )
 
 type GithubUserInfo struct {
@@ -139,6 +139,8 @@ func Oauth2Callback(c *gin.Context) {
 	code := c.Query("code")
 	state := c.Query("state")
 
+	seelog.Infof("Oauth2Callback input :%+v",c.Params)
+
 	// validate state
 	session := sessions.Default(c)
 	if len(state) == 0 || state != session.Get(SESSION_GITHUB_STATE) {
@@ -151,6 +153,7 @@ func Oauth2Callback(c *gin.Context) {
 
 	// exchange accesstoken by code
 	token, err := exchangeTokenByCode(code)
+	seelog.Infof("Oauth2Callback code:%s,token:%s,err :%+v",code,token,err)
 	if err != nil {
 		seelog.Error(err)
 		c.Redirect(http.StatusMovedPermanently, "/signin")
@@ -159,6 +162,7 @@ func Oauth2Callback(c *gin.Context) {
 
 	//get github userinfo by accesstoken
 	userInfo, err = getGithubUserInfoByAccessToken(token)
+	seelog.Infof("Oauth2Callback userInfo:%+v,token:%s,err :%+v",userInfo,token,err)
 	if err != nil {
 		seelog.Error(err)
 		c.Redirect(http.StatusMovedPermanently, "/signin")
@@ -175,7 +179,9 @@ func Oauth2Callback(c *gin.Context) {
 			}
 			user.AvatarUrl = userInfo.AvatarURL
 			user.GithubUrl = userInfo.HTMLURL
+			seelog.Infof("Oauth2Callback is github user,update")
 			err = user.UpdateGithubUserInfo()
+			seelog.Infof("Oauth2Callback is github user,updated,err:%+v",err)
 		} else {
 			err = errors.New("this github loginId has bound another account.")
 		}
@@ -185,7 +191,9 @@ func Oauth2Callback(c *gin.Context) {
 			AvatarUrl:     userInfo.AvatarURL,
 			GithubUrl:     userInfo.HTMLURL,
 		}
+		seelog.Infof("Oauth2Callback new github user:%+v",user)
 		user, err = user.FirstOrCreate()
+		seelog.Infof("Oauth2Callback new github user:%+v,err:%+v",user,err)
 		if err == nil {
 			if user.LockState {
 				err = errors.New("Your account have been locked.")
