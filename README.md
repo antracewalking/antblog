@@ -24,14 +24,19 @@
 我这边初期会把database改成mysql，文件存储早期用redis。wblog的部分改动，参考https://www.cnblogs.com/bugmaking/p/9083311.html（上述文章可能是转载，原始的文章应该是http://www.bugclosed.com/post/14，不过cnblog的样式看起来舒服）
 
 初步的规划
+
 1: 数据库方面会选择redis + mysql + mongodb + hbase等，这些db分别支持不同情形的使用，这也是一个互联网公司项目常见的存储模型
   redis提供性能方面的存储，mysql提供一般的业务存储，mongodb提供nosql方面的存储，hbase方面是支持大数据相关，比如后面对业务日志做分析实验。
+
 2: 后端服务采用router(nginx) + inrouter(nginx) + go server方式
  router做外围接入层，支持安全策略（比如IP、UID白名单、限制策略、一般性限流、过载保护等），
  inrouter支持静态文件访问，内部的路由分发策略等
  go server提供真正的业务（采用gin框架，后端管理系统使用gorm，配置采用yaml，服务端配置推送到服务器采用zookeeper，服务守护采用Supervisor以及日志的采集推送监控等等）
+
 3: 前端后面预计会采用typescript(主要是看起来跟OO很像，用起来可能稍微方便些，不过也是太庞杂了)；
+
 4: 系统部署上，后面也会采用多云策略（百度云、腾讯云等）做稳定性考量，会针对系统稳定性做些尝试。 目前已购买百度云服务器（http://180.76.114.111/，域名antracewalking.fun[10年，审核中]）
+
 5: 后面预计后面也会做产品生产相关的，比如代码使用github存储，项目工程管理、代码打包上线回滚系统，线上系统的扩缩容等，反正涉及到的东西都想尝试下，这个范围有点太大，可能难以实现。
 
 
