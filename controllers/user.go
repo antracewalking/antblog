@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"strconv"
+	"time"
 
 	"github.com/alimoeeny/gooauth2"
 	"github.com/cihub/seelog"
@@ -80,6 +81,7 @@ func SignupPost(c *gin.Context) {
 		Telephone: telephone,
 		Password:  password,
 		IsAdmin:   true,
+		OutTime:	   time.Now().AddDate(0,0,1),
 	}
 	if len(user.Email) == 0 || len(user.Password) == 0 {
 		res["message"] = "email or password cannot be null"
@@ -190,6 +192,7 @@ func Oauth2Callback(c *gin.Context) {
 			GithubLoginId: userInfo.Login,
 			AvatarUrl:     userInfo.AvatarURL,
 			GithubUrl:     userInfo.HTMLURL,
+			OutTime:       time.Now().AddDate(0,0,1),
 		}
 		seelog.Infof("Oauth2Callback new github user:%+v",user)
 		user, err = user.FirstOrCreate()
@@ -257,6 +260,7 @@ func getGithubUserInfoByAccessToken(token string) (*GithubUserInfo, error) {
 	if err != nil {
 		return nil, err
 	}
+	seelog.Infof("github user info:%#v",body)
 	var userInfo GithubUserInfo
 	err = json.Unmarshal(body, &userInfo)
 	return &userInfo, err
